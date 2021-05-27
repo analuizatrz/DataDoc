@@ -6,6 +6,6 @@ namespace DataDoc.Domain
 	{
 		public string VersionCreated { get; set; }
 		public string LastVersionModified { get; set; }
-		IEnumerable<Column> Columns { get; set; }
+		public IEnumerable<Column> Columns { get; set; }
 	}
 }

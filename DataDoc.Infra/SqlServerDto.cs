@@ -1,11 +1,10 @@
-﻿namespace DataDoc.Domain
+﻿namespace DataDoc.Infra
 {
-	public class Column : Entity
+	public class SqlServerDto
 	{
-		public string VersionCreated { get; set; }
-		public string LastVersionModified { get; set; }
-		public bool IsPrimaryKey { get; set; }
-		public bool IsForeignKey { get; set; }
+		public string TableCatalog { get; set; }
+		public string TableName { get; set; }
+		public string ColumnName { get; set; }
 		public int OrdinalPosition { get; set; }
 		public string ColumnDefault { get; set; }
 		public string DataType { get; set; }

@@ -4,6 +4,6 @@ namespace DataDoc.Domain
 {
 	public class Database : Entity
 	{
-		IEnumerable<Table> Tables { get; set; }
+		public IEnumerable<Table> Tables { get; set; }
 	}
 }
