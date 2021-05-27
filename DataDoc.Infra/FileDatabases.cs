@@ -18,5 +18,10 @@ namespace DataDoc.Infra
 			var json = JsonConvert.SerializeObject(database, Formatting.Indented, jsonSettings);
 			File.WriteAllText(Path.Combine(FolderPath, $"{database.Name}.json"), json);
 		}
+		public Database Read(string databaseName)
+		{
+			var json = File.ReadAllText(Path.Combine(FolderPath, $"{databaseName}.json"));
+			return JsonConvert.DeserializeObject<Database>(json);
+		}
 	}
 }
