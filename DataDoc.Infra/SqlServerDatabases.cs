@@ -38,6 +38,5 @@ namespace DataDoc.Infra
 				return DatabaseBuilder.From(dtos);
 			}
 		}
-		
 	}
 }

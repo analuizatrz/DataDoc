@@ -5,7 +5,7 @@ namespace DataDoc.Domain
 {
 	public class DatabaseVersioner
 	{
-		public DatabaseChanges Changes(Database lastVersion, Database currentVersion)
+		public DatabaseChanges Changes(Database currentVersion, Database lastVersion)
 		{
 			return new DatabaseChanges
 			{
