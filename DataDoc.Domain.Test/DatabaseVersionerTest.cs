@@ -159,8 +159,8 @@ namespace DataDoc.Domain.Test
 		[InlineData(false, 2, 1, "Table B")]
 		[InlineData(true, 3, 2, "Table A")]
 		[InlineData(false, 3, 2, "Table B")]
-		[InlineData(true, 3, 2, "Table C")]
-		[InlineData(true, 2, 3, "Table A")]
+		[InlineData(false, 3, 2, "Table C")]
+		[InlineData(false, 2, 3, "Table A")]
 		[InlineData(false, 2, 3, "Table B")]
 		[InlineData(true, 2, 3, "Table C")]
 		public void WhenVerifyingChangesDeletedTablesShouldBe(bool expected, int listOne, int listTwo, string tableName)
