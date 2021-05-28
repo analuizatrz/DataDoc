@@ -4,12 +4,21 @@ namespace DataDoc.Playground
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static void DacpacFileRead()
 		{
+			var path = @"C:\data.dacpac";
+			var database = new DacFileDatabases(path).Read(path);
+		}
+		static void SqlServerRead()
+		{
+			//var database = new FileDatabases(@"C:\Users\42Codelab\Desktop").Read("BeyoungDoc");
 			var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=Employee;Integrated Security=true;";
 			var database = new SqlServerDatabases().Read(connectionString);
-			//new FileDatabases(@"C:\Users\42Codelab\Desktop\").Save(database);
-			//var database = new FileDatabases(@"C:\").Read("Employee");
+			//new FileDatabases(@"C:\").Save(database);
+		}
+		static void Main(string[] args)
+		{
+			DacpacFileRead();
 		}	
 	}
 }
