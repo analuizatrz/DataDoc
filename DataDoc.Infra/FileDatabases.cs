@@ -4,14 +4,13 @@ using System.IO;
 
 namespace DataDoc.Infra
 {
-	public class FileDatabases
+	public class FileDatabases : IRepository<Database>
 	{
 		public string FolderPath { get; }
 		public FileDatabases(string folderPath)
 		{
 			FolderPath = folderPath;
 		}
-
 		public void Save(Database database)
 		{
 			var jsonSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };

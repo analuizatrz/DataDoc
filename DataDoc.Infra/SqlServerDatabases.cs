@@ -1,15 +1,12 @@
 ﻿using Dapper;
 using DataDoc.Domain;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace DataDoc.Infra
 {
 	public class SqlServerDatabases
 	{
-		public Database Get(string connectionString)
+		public Database Read(string connectionString)
 		{
 			var query = @"  
 			SELECT 
@@ -37,41 +34,10 @@ namespace DataDoc.Infra
 			
 			using (var connection = new SqlConnection(connectionString))
 			{
-				var dtos = connection.Query<SqlServerDto>(query);
-				return DatabaseFrom(dtos);
+				var dtos = connection.Query<DatabaseModel>(query);
+				return DatabaseBuilder.From(dtos);
 			}
 		}
-		public Database DatabaseFrom(IEnumerable<SqlServerDto> dtos)
-		{
-			var name = dtos.First().TableCatalog;
-			var tables = dtos
-							.GroupBy(x => x.TableName)
-							.Select(table => TableFrom(table));
-			return new Database { Name = name, Tables = tables };
-		}
-		public Table TableFrom(IEnumerable<SqlServerDto> dtos)
-		{
-			var name = dtos.First().TableName;
-			var columns = dtos.Select(x => ColumnFrom(x));
-			return new Table { Name = name, Columns = columns };
-		}
-		public Column ColumnFrom(SqlServerDto x)
-		{
-			return new Column {
-				Name = x.ColumnName,
-				OrdinalPosition = x.OrdinalPosition,
-				ColumnDefault = x.ColumnDefault,
-				DataType = x.DataType,
-				CharacterMaximumLength = x.CharacterMaximumLength,
-				NumericPrecision = x.NumericPrecision,
-				NumericPrecisionRadix = x.NumericPrecisionRadix,
-				NumericScale = x.NumericScale,
-				DatetimePrecision = x.DatetimePrecision,
-				ConstraintName = x.ConstraintName,
-				ConstrainType = x.ConstrainType,
-				PrimaryKeyReferenced = x.PrimaryKeyReferenced,
-
-			};
-		}
+		
 	}
 }

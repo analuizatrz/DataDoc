@@ -1,6 +1,6 @@
-﻿namespace DataDoc.Infra
+﻿namespace DataDoc.Domain
 {
-	public class SqlServerDto
+	public class DatabaseModel
 	{
 		public string TableCatalog { get; set; }
 		public string TableName { get; set; }
