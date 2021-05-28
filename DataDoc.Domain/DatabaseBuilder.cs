@@ -35,7 +35,6 @@ namespace DataDoc.Domain
 				ConstraintName = x.ConstraintName,
 				ConstrainType = x.ConstrainType,
 				PrimaryKeyReferenced = x.PrimaryKeyReferenced,
-
 			};
 		}
 	}
