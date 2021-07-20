@@ -4,10 +4,10 @@ using System.IO;
 
 namespace DataDoc.Infra
 {
-	public class FileDatabases : IRepository<Database>
+	public class JsonFileDatabases : IRepository<Database>
 	{
 		public string FolderPath { get; }
-		public FileDatabases(string folderPath)
+		public JsonFileDatabases(string folderPath)
 		{
 			FolderPath = folderPath;
 		}
