@@ -300,10 +300,9 @@ namespace DataDoc.Domain.Test
 		{
 			return items.Select(x => new Database { Name = x }).ToList();
 		}
-		public static Table NameAndListOfColumns(params string[] items)
+		public static Table NameAndListOfColumns(string name, params string[] items)
 		{
-			var name = items[0];
-			var columns = items.Skip(1).Select(x => new Column { Name = x}).ToList();
+			var columns = items.Select(x => new Column { Name = x}).ToList();
 			return new Table { Name = name, Columns = columns };
 		}
 	}
