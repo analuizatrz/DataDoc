@@ -13,7 +13,7 @@ namespace DataDoc.Playground
 		{
 			//var database = new FileDatabases(@"C:\Users\42Codelab\Desktop").Read("BeyoungDoc");
 			var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=Employee;Integrated Security=true;";
-			var database = new SqlServerDatabases().Read(connectionString);
+			var database = new SqlServerDatabases(new Domain.DatabaseModelParser()).Read(connectionString);
 			//new FileDatabases(@"C:\").Save(database);
 		}
 		static void Main(string[] args)

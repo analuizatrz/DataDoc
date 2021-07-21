@@ -6,12 +6,14 @@ namespace DataDoc.Domain.Test
 {
 	public class DataBaseModelParserTest
 	{
+		DatabaseModelParser DatabaseModelParser;
 		DatabaseModel model;
 		IEnumerable<DatabaseModel> modelsOfOneTable;
 		IEnumerable<DatabaseModel> modelsOfAnyTable;
 		IList<IEnumerable<DatabaseModel>> modelsSets;
 		public DataBaseModelParserTest()
 		{
+			DatabaseModelParser = new DatabaseModelParser();
 			model = new DatabaseModel
 			{
 				TableCatalog = "Employee",

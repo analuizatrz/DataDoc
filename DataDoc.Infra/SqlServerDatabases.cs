@@ -6,6 +6,12 @@ namespace DataDoc.Infra
 {
 	public class SqlServerDatabases
 	{
+		DatabaseModelParser DatabaseModelParser { get; }
+		public SqlServerDatabases(DatabaseModelParser databaseModelParser)
+		{
+			DatabaseModelParser = databaseModelParser;
+		}
+
 		public Database Read(string connectionString)
 		{
 			var query = @"  
@@ -35,7 +41,7 @@ namespace DataDoc.Infra
 			using (var connection = new SqlConnection(connectionString))
 			{
 				var dtos = connection.Query<DatabaseModel>(query);
-				return DatabaseBuilder.From(dtos);
+				return DatabaseModelParser.From(dtos);
 			}
 		}
 	}

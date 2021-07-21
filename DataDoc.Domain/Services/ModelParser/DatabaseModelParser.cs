@@ -5,7 +5,7 @@ namespace DataDoc.Domain
 {
 	public class DatabaseModelParser
 	{
-		public static Database From(IEnumerable<DatabaseModel> dtos)
+		public Database From(IEnumerable<DatabaseModel> dtos)
 		{
 			var name = dtos.First().TableCatalog;
 			var tables = dtos
@@ -13,13 +13,13 @@ namespace DataDoc.Domain
 							.Select(table => TableFrom(table));
 			return new Database { Name = name, Tables = tables };
 		}
-		public static Table TableFrom(IEnumerable<DatabaseModel> dtos)
+		public Table TableFrom(IEnumerable<DatabaseModel> dtos)
 		{
 			var name = dtos.First().TableName;
 			var columns = dtos.Select(x => ColumnFrom(x));
 			return new Table { Name = name, Columns = columns };
 		}
-		public static Column ColumnFrom(DatabaseModel x)
+		public Column ColumnFrom(DatabaseModel x)
 		{
 			return new Column
 			{
