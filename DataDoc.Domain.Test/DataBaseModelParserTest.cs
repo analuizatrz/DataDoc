@@ -4,13 +4,13 @@ using Xunit;
 
 namespace DataDoc.Domain.Test
 {
-	public class DatabaseBuilderTest
+	public class DataBaseModelParserTest
 	{
 		DatabaseModel model;
 		IEnumerable<DatabaseModel> modelsOfOneTable;
 		IEnumerable<DatabaseModel> modelsOfAnyTable;
 		IList<IEnumerable<DatabaseModel>> modelsSets;
-		public DatabaseBuilderTest()
+		public DataBaseModelParserTest()
 		{
 			model = new DatabaseModel
 			{
@@ -78,7 +78,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsOfOneTable.Select(x => new DatabaseModel { TableCatalog = expected, ColumnName = x.ColumnName });
 
-			var actual = DatabaseBuilder.From(models).Name;
+			var actual = DatabaseModelParser.From(models).Name;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -88,7 +88,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsSets[index];
 
-			var actual = DatabaseBuilder.From(models).Tables.Count();
+			var actual = DatabaseModelParser.From(models).Tables.Count();
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -99,7 +99,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsSets[modelsIndex];
 
-			var actual = DatabaseBuilder.From(models).Tables.ToList()[tableIndex].Name;
+			var actual = DatabaseModelParser.From(models).Tables.ToList()[tableIndex].Name;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -110,7 +110,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsSets[modelsIndex];
 
-			var actual = DatabaseBuilder.From(models).Tables.ToList()[tableIndex].Columns.Count();
+			var actual = DatabaseModelParser.From(models).Tables.ToList()[tableIndex].Columns.Count();
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -120,7 +120,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsOfOneTable.Select(x => new DatabaseModel { TableName = expected, ColumnName = x.ColumnName });
 
-			var actual = DatabaseBuilder.TableFrom(models).Name;
+			var actual = DatabaseModelParser.TableFrom(models).Name;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -131,7 +131,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsOfOneTable.Take(expected);
 
-			var actual = DatabaseBuilder.TableFrom(models).Columns.Count();
+			var actual = DatabaseModelParser.TableFrom(models).Columns.Count();
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -142,7 +142,7 @@ namespace DataDoc.Domain.Test
 		{
 			var models = modelsOfOneTable;
 
-			var actual = DatabaseBuilder.TableFrom(models).Columns.ToList()[index].Name;
+			var actual = DatabaseModelParser.TableFrom(models).Columns.ToList()[index].Name;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -151,7 +151,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelNameShouldBe(string expected)
 		{
 			model.ColumnName = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).Name;
+			var actual = DatabaseModelParser.ColumnFrom(model).Name;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -160,7 +160,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelOrdinalPositionShouldBe(int expected)
 		{
 			model.OrdinalPosition = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).OrdinalPosition;
+			var actual = DatabaseModelParser.ColumnFrom(model).OrdinalPosition;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -170,7 +170,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelColumnDefaultShouldBe(string expected)
 		{
 			model.ColumnDefault = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).ColumnDefault;
+			var actual = DatabaseModelParser.ColumnFrom(model).ColumnDefault;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -179,7 +179,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelDataTypeShouldBe(string expected)
 		{
 			model.DataType = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).DataType;
+			var actual = DatabaseModelParser.ColumnFrom(model).DataType;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -189,7 +189,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelCharacterMaximumLengthShouldBe(int? expected)
 		{
 			model.CharacterMaximumLength = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).CharacterMaximumLength;
+			var actual = DatabaseModelParser.ColumnFrom(model).CharacterMaximumLength;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -199,7 +199,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelNumericPrecisionShouldBe(int? expected)
 		{
 			model.NumericPrecision = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).NumericPrecision;
+			var actual = DatabaseModelParser.ColumnFrom(model).NumericPrecision;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -209,7 +209,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelNumericPrecisionRadixShouldBe(int? expected)
 		{
 			model.NumericPrecisionRadix = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).NumericPrecisionRadix;
+			var actual = DatabaseModelParser.ColumnFrom(model).NumericPrecisionRadix;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -219,7 +219,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelNumericScaleShouldBe(int? expected)
 		{
 			model.NumericScale = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).NumericScale;
+			var actual = DatabaseModelParser.ColumnFrom(model).NumericScale;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -229,7 +229,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelDatetimePrecisionShouldBe(int? expected)
 		{
 			model.DatetimePrecision = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).DatetimePrecision;
+			var actual = DatabaseModelParser.ColumnFrom(model).DatetimePrecision;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -239,7 +239,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelConstraintNameShouldBe(string expected)
 		{
 			model.ConstraintName = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).ConstraintName;
+			var actual = DatabaseModelParser.ColumnFrom(model).ConstraintName;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -249,7 +249,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelConstrainTypeShouldBe(string expected)
 		{
 			model.ConstrainType = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).ConstrainType;
+			var actual = DatabaseModelParser.ColumnFrom(model).ConstrainType;
 			Assert.Equal(expected, actual);
 		}
 		[Theory]
@@ -258,7 +258,7 @@ namespace DataDoc.Domain.Test
 		public void WhenBuildingFromModelPrimaryKeyReferencedShouldBe(string expected)
 		{
 			model.PrimaryKeyReferenced = expected;
-			var actual = DatabaseBuilder.ColumnFrom(model).PrimaryKeyReferenced;
+			var actual = DatabaseModelParser.ColumnFrom(model).PrimaryKeyReferenced;
 			Assert.Equal(expected, actual);
 		}
 	}

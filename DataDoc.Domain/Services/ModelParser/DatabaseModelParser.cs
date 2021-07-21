@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DataDoc.Domain
 {
-	public class DatabaseBuilder
+	public class DatabaseModelParser
 	{
 		public static Database From(IEnumerable<DatabaseModel> dtos)
 		{
